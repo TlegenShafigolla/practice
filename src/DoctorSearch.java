@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class DoctorSearch {
 
@@ -28,17 +29,17 @@ public class DoctorSearch {
         }
     }
 
-    private static Doctor findDoctorById(
+    private static Optional<Doctor> findDoctorById(
             List<Doctor> doctors,
             long doctorId
     ) {
         for (Doctor doctor : doctors) {
             if (doctor.getId() == doctorId) {
-                return doctor;
+                return Optional.of(doctor);
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     public static void main(String[] args) {
@@ -50,12 +51,13 @@ public class DoctorSearch {
 
         long doctorId = 2L;
 
-        Doctor doctor = findDoctorById(doctors, doctorId);
+        Optional<Doctor> doctorOptional = findDoctorById(doctors, doctorId);
 
-        if (doctor != null) {
-            System.out.println("Doctor found: " + doctor.getName());
-        } else {
-            System.out.println("Doctor not found");
-        }
+        doctorOptional.ifPresentOrElse(
+                doctor -> System.out.println(
+                        "Doctor found: " + doctor.getName()
+                ),
+                () -> System.out.println("Doctor not found")
+        );
     }
 }
