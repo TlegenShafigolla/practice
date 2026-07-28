@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public class DoctorSearch {
 
-    static class Doctor {
+     public static class Doctor {
 
         private final long id;
         private final String name;

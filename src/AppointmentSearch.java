@@ -32,7 +32,7 @@ public class AppointmentSearch {
             long appointmentId
     ) {
         for (Appointment appointment : appointments) {
-            if (appointment.id == appointmentId) {
+            if (appointment.getId() == appointmentId) {
                 return Optional.of(appointment);
             }
         }
@@ -47,15 +47,15 @@ public class AppointmentSearch {
 
         long appointmentId = 1L;
 
-        Appointment appointment = findAppointmentById(appointments,appointmentId).orElseThrow(
-                ()->  new IllegalArgumentException(
+        Appointment appointment = findAppointmentById(appointments, appointmentId).orElseThrow(
+                () -> new IllegalArgumentException(
                         "Appointment with id " + appointmentId + " not found"
                 )
         );
         if (appointment.isCancelled()) {
             System.out.println("Appointment with id " + appointmentId + " is cancelled");
-        }else {
-            System.out.println("Appointment found for: "+appointment.getPatientName());
+        } else {
+            System.out.println("Appointment found for: " + appointment.getPatientName());
         }
     }
 }
